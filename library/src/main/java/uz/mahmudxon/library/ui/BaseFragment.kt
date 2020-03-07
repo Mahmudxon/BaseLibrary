@@ -97,4 +97,11 @@ abstract class BaseFragment(@LayoutRes val resId: Int, val canswipe: Boolean = f
     fun finish() {
         activity?.supportFragmentManager?.popBackStack()
     }
+    fun lockSwipable() {
+        slidrInterface?.lock()
+    }
+
+    fun unlockSwipable() {
+        slidrInterface?.unlock()
+    }
 }
