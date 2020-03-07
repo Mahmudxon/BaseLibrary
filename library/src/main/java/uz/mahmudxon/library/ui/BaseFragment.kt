@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.r0adkll.slidr.Slidr
 import com.r0adkll.slidr.model.SlidrConfig
@@ -47,7 +48,7 @@ abstract class BaseFragment(@LayoutRes val resId: Int, val canswipe: Boolean = f
     @SuppressLint("ResourceType")
     fun startFragment(fragment: BaseFragment, senderData: Any? = null, isAnimate: Boolean) {
         fragment.senderData = senderData
-        val transaction = fragmentManager?.beginTransaction()
+        val transaction = activity?.supportFragmentManager?.beginTransaction()
         if (isAnimate)
             transaction?.setCustomAnimations(
                 R.anim.enter,
@@ -65,7 +66,7 @@ abstract class BaseFragment(@LayoutRes val resId: Int, val canswipe: Boolean = f
     @SuppressLint("ResourceType")
     fun addFragment(fragment: BaseFragment, senderData: Any? = null, isAnimate: Boolean = false) {
         fragment.senderData = senderData
-        val transaction = fragmentManager?.beginTransaction()
+        val transaction = activity?.supportFragmentManager?.beginTransaction()
         if (isAnimate)
             transaction?.setCustomAnimations(
                 R.anim.enter,
@@ -88,8 +89,12 @@ abstract class BaseFragment(@LayoutRes val resId: Int, val canswipe: Boolean = f
         }
     }
 
+    fun closeAllFragmentsAndOpenThis(fragment: BaseFragment, isAnimate: Boolean = true) {
+        activity?.supportFragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        startFragment(fragment, isAnimate = isAnimate)
+    }
 
     fun finish() {
-        fragmentManager?.popBackStack()
+        activity?.supportFragmentManager?.popBackStack()
     }
 }
