@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -16,6 +17,7 @@ import com.r0adkll.slidr.model.SlidrConfig
 import com.r0adkll.slidr.model.SlidrInterface
 import com.r0adkll.slidr.model.SlidrPosition
 import uz.mahmudxon.library.R
+import uz.mahmudxon.library.util.startFragment
 
 
 abstract class BaseFragment(@LayoutRes val resId: Int, val canswipe: Boolean = false) : Fragment() {
@@ -91,7 +93,7 @@ abstract class BaseFragment(@LayoutRes val resId: Int, val canswipe: Boolean = f
 
     fun closeAllFragmentsAndOpenThis(fragment: BaseFragment, isAnimate: Boolean = true) {
         activity?.supportFragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-        startFragment(fragment, isAnimate = isAnimate)
+        (activity as AppCompatActivity).startFragment(fragment,  null, isAnimate = isAnimate)
     }
 
     fun finish() {
