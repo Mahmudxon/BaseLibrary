@@ -31,7 +31,8 @@ abstract class BaseFragment(@LayoutRes val resId: Int, val canswipe: Boolean = f
         savedInstanceState: Bundle?
     ): View? {
         oldview = inflater.inflate(resId, container, false)
-        oldview.setOnTouchListener { _, _ -> true }
+        if (canswipe)
+            oldview.setOnTouchListener { _, _ -> true }
         return if(canswipe) FrameLayout(requireContext()).apply {
             setBackgroundColor(Color.TRANSPARENT)
             addView(oldview)
