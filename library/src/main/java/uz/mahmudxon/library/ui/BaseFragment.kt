@@ -106,4 +106,9 @@ abstract class BaseFragment(@LayoutRes val resId: Int, val canswipe: Boolean = f
     fun unlockSwipable() {
         slidrInterface?.unlock()
     }
+
+    fun openFragment(f : BaseFragment)
+    {
+        addFragment(f, null, true)
+    }
 }
