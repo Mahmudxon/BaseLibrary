@@ -91,7 +91,7 @@ abstract class BaseFragment(@LayoutRes val resId: Int, val canswipe: Boolean = f
         }
     }
 
-    fun closeAllFragmentsAndOpenThis(fragment: BaseFragment, isAnimate: Boolean = true) {
+    fun replaceAllFragments(fragment: BaseFragment, isAnimate: Boolean = true) {
         activity?.supportFragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         (activity as AppCompatActivity).startFragment(fragment,  null, isAnimate = isAnimate)
     }
