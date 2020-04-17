@@ -62,7 +62,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 ```
 ### Base Fragment methods for managing fragments:
 
-openFragment(out BaseFragment) - open your fragment
-addFragment() - open Fragment you control animation and you can send senderData
-startFragment() - replace Fragment you control animation and you can send senderData
-replaceAll() - close all Fragments open this
+* openFragment(out BaseFragment) - open your fragment
+* addFragment() - open Fragment you control animation and you can send senderData
+* startFragment() - replace Fragment you control animation and you can send senderData
+* replaceAll() - close all Fragments open this
