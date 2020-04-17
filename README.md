@@ -19,14 +19,15 @@ allprojects {
        ...
         maven { url 'https://jitpack.io' }
     }
-``
+
+```
 
 ```
 dependencies {
        ...
     implementation 'com.github.Mahmudxon:BaseLibrary:3.1'
     }
-``
+```
 
 ## Using
 
@@ -40,7 +41,7 @@ dependencies {
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity" />
-``
+```
 
 Note: You must use only FrameLayout in main contaner!!!
 
@@ -48,7 +49,7 @@ Note: You must use only FrameLayout in main contaner!!!
 
 ```
 class ScanFragment : BaseFragment(R.layout.fragment_scan, true /* if you want fragment close by swipe. Default value false */)
-``
+```
 
 Call Main fragment in Activity OnCreate Method:
 
@@ -58,7 +59,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
         startFragment(MainFragment())
     }
-``
+```
 ### Base Fragment methods for managing fragments:
 
 openFragment(out BaseFragment) - open your fragment
