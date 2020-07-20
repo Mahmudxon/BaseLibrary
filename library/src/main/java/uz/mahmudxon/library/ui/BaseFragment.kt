@@ -3,6 +3,7 @@ package uz.mahmudxon.library.ui
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,8 @@ import uz.mahmudxon.library.util.startFragment
 abstract class BaseFragment(@LayoutRes val resId: Int, val canswipe: Boolean = false) : Fragment() {
     internal var senderData: Any? = null
 
+    private var isUseBackPress = true
+
     var slidrInterface: SlidrInterface? = null
     lateinit var oldview: View
     override fun onCreateView(
@@ -33,7 +36,7 @@ abstract class BaseFragment(@LayoutRes val resId: Int, val canswipe: Boolean = f
         oldview = inflater.inflate(resId, container, false)
         if (canswipe)
             oldview.setOnTouchListener { _, _ -> true }
-        return if(canswipe) FrameLayout(requireContext()).apply {
+        return if (canswipe) FrameLayout(requireContext()).apply {
             setBackgroundColor(Color.TRANSPARENT)
             addView(oldview)
         }
@@ -43,8 +46,20 @@ abstract class BaseFragment(@LayoutRes val resId: Int, val canswipe: Boolean = f
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         onCreatedView(senderData)
+        view.isFocusableInTouchMode = true
+        view.requestFocus()
+        view.setOnKeyListener { _, keyCode, _ ->
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                isUseBackPress = true
+                onBackPressed()
+                return@setOnKeyListener isUseBackPress
+            } else return@setOnKeyListener false
+        }
     }
 
+    open fun onBackPressed() {
+        isUseBackPress = false
+    }
 
     abstract fun onCreatedView(senderData: Any?)
 
@@ -93,13 +108,17 @@ abstract class BaseFragment(@LayoutRes val resId: Int, val canswipe: Boolean = f
     }
 
     fun replaceAllFragments(fragment: BaseFragment, isAnimate: Boolean = true) {
-        activity?.supportFragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-        (activity as AppCompatActivity).startFragment(fragment,  null, isAnimate = isAnimate)
+        activity?.supportFragmentManager?.popBackStack(
+            null,
+            FragmentManager.POP_BACK_STACK_INCLUSIVE
+        )
+        (activity as AppCompatActivity).startFragment(fragment, null, isAnimate = isAnimate)
     }
 
     fun finish() {
         activity?.supportFragmentManager?.popBackStack()
     }
+
     fun lockSwipable() {
         slidrInterface?.lock()
     }
@@ -108,8 +127,9 @@ abstract class BaseFragment(@LayoutRes val resId: Int, val canswipe: Boolean = f
         slidrInterface?.unlock()
     }
 
-    fun openFragment(f : BaseFragment)
-    {
+    fun openFragment(f: BaseFragment) {
         addFragment(f, null, true)
     }
+
+
 }
