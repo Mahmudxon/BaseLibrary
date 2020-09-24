@@ -27,7 +27,9 @@ abstract class BaseFragment(@LayoutRes val resId: Int, val canswipe: Boolean = f
     private var isUseBackPress = true
 
     var slidrInterface: SlidrInterface? = null
-    lateinit var oldview: View
+    private lateinit var oldview: View
+
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,8 +50,8 @@ abstract class BaseFragment(@LayoutRes val resId: Int, val canswipe: Boolean = f
         onCreatedView(senderData)
         view.isFocusableInTouchMode = true
         view.requestFocus()
-        view.setOnKeyListener { _, keyCode, _ ->
-            if (keyCode == KeyEvent.KEYCODE_BACK) {
+        view.setOnKeyListener { _, keyCode, action ->
+            if (keyCode == KeyEvent.KEYCODE_BACK && action.action == KeyEvent.ACTION_DOWN) {
                 isUseBackPress = true
                 onBackPressed()
                 return@setOnKeyListener isUseBackPress
