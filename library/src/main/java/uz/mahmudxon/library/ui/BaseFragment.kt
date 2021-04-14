@@ -47,7 +47,7 @@ abstract class BaseFragment(@LayoutRes val resId: Int, val canswipe: Boolean = f
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        onCreatedView(senderData)
+        onCreatedView(view, senderData)
         view.isFocusableInTouchMode = true
         view.requestFocus()
         view.setOnKeyListener { _, keyCode, action ->
@@ -63,7 +63,7 @@ abstract class BaseFragment(@LayoutRes val resId: Int, val canswipe: Boolean = f
         isUseBackPress = false
     }
 
-    abstract fun onCreatedView(senderData: Any?)
+    abstract fun onCreatedView(view: View, senderData: Any?)
 
     @SuppressLint("ResourceType")
     fun startFragment(fragment: BaseFragment, senderData: Any? = null, isAnimate: Boolean) {
