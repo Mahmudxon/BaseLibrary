@@ -25,7 +25,7 @@ allprojects {
 ```
 dependencies {
        ...
-    implementation 'com.github.Mahmudxon:BaseLibrary:3.3'
+    implementation 'com.github.Mahmudxon:BaseLibrary:3.4'
     }
 ```
 
