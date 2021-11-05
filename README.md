@@ -1,3 +1,6 @@
+# (!) This repository is no longer supported
+
+
 # Base Library
 
 Android library for managing multiple stacks of fragments in main contaner. (e.g., open fragments, close)
