@@ -1,7 +1,9 @@
 # (!) This repository is no longer supported
 
+Please, use [Navigation component](https://developer.android.com/guide/navigation/navigation-getting-started)
 
-# Base Library
+# Base Library [![](https://jitpack.io/v/Mahmudxon/BaseLibrary.svg)](https://jitpack.io/#Mahmudxon/BaseLibrary)
+
 
 Android library for managing multiple stacks of fragments in main contaner. (e.g., open fragments, close)
 
@@ -28,7 +30,7 @@ allprojects {
 ```
 dependencies {
        ...
-    implementation 'com.github.Mahmudxon:BaseLibrary:3.4'
+    implementation 'com.github.Mahmudxon:BaseLibrary:LAST_VERSION'
     }
 ```
 
